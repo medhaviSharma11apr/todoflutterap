@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todoflutterapp/core/theme/app_theme.dart';
 
 void main() {
   runApp(const MyApp());
@@ -10,9 +11,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+      theme: AppTheme.darkThemeMode,
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
@@ -60,7 +59,7 @@ class _MyHomePageState extends State<MyHomePage> {
         onPressed: _incrementCounter,
         tooltip: 'Increment',
         child: const Icon(Icons.add),
-      ), 
+      ),
     );
   }
 }
