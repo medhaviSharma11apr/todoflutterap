@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:todoflutterapp/core/theme/app_color.dart';
 
 class RoundedElevatedButton extends StatelessWidget {
-  const RoundedElevatedButton({
+ RoundedElevatedButton({
     super.key,
     required this.buttonText,
     this.onPressed,
-    required this.color,
+   this.color = AppColor.appColor,
   });
 
   final String buttonText;
   final Function()? onPressed;
-  final Color color;
+   Color color;
 
   @override
   Widget build(BuildContext context) {
@@ -28,14 +28,11 @@ class RoundedElevatedButton extends StatelessWidget {
           ),
           fixedSize: MaterialStateProperty.all(
               Size(MediaQuery.of(context).size.width, 45))),
-      child: Text(
-        buttonText,
-        style: const TextStyle(
-          color: AppColor.whiteColor,
-          fontWeight: FontWeight.w600,
-          fontSize: 16,
-        ),
-      ),
+      child: Text(buttonText, style: const TextStyle(
+        color: AppColor.whiteColor,
+        fontWeight: FontWeight.w600,
+        fontSize: 16,
+      ),),
     );
   }
 }
