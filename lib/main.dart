@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todoflutterapp/core/routes/routes.dart';
 import 'package:todoflutterapp/core/theme/app_theme.dart';
 
 void main() {
@@ -9,10 +10,11 @@ class MyApp extends StatelessWidget {
   const MyApp({super.key});
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       title: 'Flutter Demo',
       theme: AppTheme.darkThemeMode,
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      routerConfig: router,
+      // home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
 }
