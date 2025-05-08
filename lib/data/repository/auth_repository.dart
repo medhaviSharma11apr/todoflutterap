@@ -19,6 +19,8 @@ abstract class IAuthRepository {
     required String email,
     required String password,
   });
+
+  Future<Either<Failure, Session>> checkSession();
 }
 
 class AuthRepo implements IAuthRepository {
@@ -67,12 +69,11 @@ class AuthRepo implements IAuthRepository {
   @override
   Future<Either<Failure, Session>> login(
       {required String email, required String password}) async {
-          try {
+    try {
       // if ( await _internetConnectionChecker.hasConnection) {
       Session session = await _appWriteProvider.account!.createEmailSession(
-       email: email,
-       password: password,
-      
+        email: email,
+        password: password,
       );
       User user = await _appWriteProvider.account!.get();
       return right(session);
@@ -84,6 +85,18 @@ class AuthRepo implements IAuthRepository {
     } on ServerException catch (e) {
       return left(Failure(e.message.toString()));
     }
-   
+  }
+
+  @override
+  Future<Either<Failure, Session>> checkSession() async {
+    try {
+      Session session =
+          await _appWriteProvider.account!.getSession(sessionId: "current");
+      return right(session);
+    } on AppwriteException catch (e) {
+      return left(Failure(e.message.toString()));
+    } on ServerException catch (e) {
+      return left(Failure(e.message.toString()));
+    }
   }
 }

@@ -4,8 +4,10 @@ import 'package:get_storage/get_storage.dart';
 import 'package:todoflutterapp/core/locator/locator.dart';
 import 'package:todoflutterapp/core/routes/routes.dart';
 import 'package:todoflutterapp/core/theme/app_theme.dart';
+import 'package:todoflutterapp/features/auth/cubit/login_cubit.dart';
 
 import 'features/auth/cubit/register_cubit.dart';
+import 'features/spalsh/cubit/splash_cubit.dart';
 
 void main() async {
   setUpLocator();
@@ -17,6 +19,12 @@ void main() async {
     providers: [
       BlocProvider(
         create: (_) => RegisterCubit(),
+      ),
+      BlocProvider(
+        create: (_) => LoginCubit(),
+      ),
+        BlocProvider(
+        create: (_) => SplashCubit(),
       ),
     ],
     child: const MyApp(),
