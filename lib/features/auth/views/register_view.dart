@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:todoflutterapp/core/theme/app_color.dart';
 import 'package:todoflutterapp/core/utils/validation_rules.dart';
 import 'package:todoflutterapp/core/widgets/custom_text_form_field.dart';
@@ -55,7 +53,7 @@ class _RegisterViewState extends State<RegisterView> {
                     controller: _firstNameController,
                     validator: ((val) {
                       if (val!.isEmpty) {
-                        return "Value is req";
+                        return "Value is required*";
                       } else {
                         return null;
                       }
@@ -72,7 +70,7 @@ class _RegisterViewState extends State<RegisterView> {
                     controller: _lastNameController,
                     validator: ((val) {
                       if (val!.isEmpty) {
-                        return "Value is req";
+                        return "Value is required*";
                       } else {
                         return null;
                       }
@@ -89,7 +87,7 @@ class _RegisterViewState extends State<RegisterView> {
                     controller: _emailController,
                     validator: ((val) {
                       if (val!.isEmpty) {
-                        return "Value is req";
+                        return "Value is required*";
                       } else if (!ValidationRules.emailValidation
                           .hasMatch(val)) {
                         return "Provide a valid email";
@@ -109,7 +107,7 @@ class _RegisterViewState extends State<RegisterView> {
                     controller: _passwordController,
                     validator: ((val) {
                       if (val!.isEmpty) {
-                        return "Value is req";
+                        return "Value is required*";
                       } else {
                         return null;
                       }
@@ -127,20 +125,18 @@ class _RegisterViewState extends State<RegisterView> {
                         isPasswordVisible
                             ? Icons.visibility
                             : Icons.visibility_off,
-                            
-                            color: AppColor.greyColor,)
-,
+                        color: AppColor.greyColor,
+                      ),
                     ),
                   ),
                   const SizedBox(
                     height: 10,
                   ),
-                  RoundedElevatedButton(buttonText: "Register",
-                  onPressed: () {
-                    if(_registerFormKey.currentState!.validate()){
-                      
-                    }
-                  },
+                  RoundedElevatedButton(
+                    buttonText: "Register",
+                    onPressed: () {
+                      if (_registerFormKey.currentState!.validate()) {}
+                    },
                   )
                 ],
               )),

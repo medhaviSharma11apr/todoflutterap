@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:todoflutterapp/core/routes/route_name.dart';
 import 'package:todoflutterapp/core/theme/app_color.dart';
 import 'package:todoflutterapp/core/utils/validation_rules.dart';
@@ -51,7 +52,7 @@ class _LoginViewState extends State<LoginView> {
                       controller: _emailController,
                       validator: ((val) {
                         if (val!.isEmpty) {
-                          return "Value is req";
+                          return "Value is required*";
                         } else if (!ValidationRules.emailValidation
                             .hasMatch(val)) {
                           return "Invalid Email";
@@ -70,7 +71,7 @@ class _LoginViewState extends State<LoginView> {
                       controller: _passwordController,
                       validator: ((val) {
                         if (val!.isEmpty) {
-                          return "Value is req";
+                          return "Value is required*";
                         } else {
                           return null;
                         }
@@ -97,20 +98,22 @@ class _LoginViewState extends State<LoginView> {
                     ),
                     RoundedElevatedButton(
                       buttonText: "Login",
-                      onPressed: () {},
+                      onPressed: () {
+                        if (_loginformKey.currentState!.validate()) {}
+                      },
                     ),
                     const SizedBox(
                       height: 10,
                     ),
                     GestureDetector(
                       onTap: () {
-                        Navigator.of(context).pushNamed(
+                        context.pushNamed(
                           RouteNames.register,
                         );
                       },
                       child: RichText(
                         text: const TextSpan(
-                            text: 'New User',
+                            text: "Don't have an account?",
                             style: TextStyle(
                                 color: AppColor.greyColor, fontSize: 16),
                             children: [
