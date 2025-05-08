@@ -3,6 +3,7 @@ import 'package:todoflutterapp/core/routes/routes.dart';
 import 'package:todoflutterapp/core/theme/app_theme.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
 
