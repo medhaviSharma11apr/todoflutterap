@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:todoflutterapp/core/locator/locator.dart';
 import 'package:todoflutterapp/core/routes/routes.dart';
 import 'package:todoflutterapp/core/theme/app_theme.dart';
 
 import 'features/auth/cubit/register_cubit.dart';
 
-void main() {
-  setupLocator();
+void main() async {
+  setUpLocator();
   WidgetsFlutterBinding.ensureInitialized();
+
+  await GetStorage.init();
 
   runApp(MultiBlocProvider(
     providers: [

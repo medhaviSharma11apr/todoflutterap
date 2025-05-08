@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:todoflutterapp/core/theme/app_color.dart';
 import 'package:todoflutterapp/core/utils/custom_snackbar.dart';
 import 'package:todoflutterapp/core/utils/full_screen_dialouge_loader.dart';
@@ -10,6 +11,8 @@ import 'package:todoflutterapp/core/utils/validation_rules.dart';
 import 'package:todoflutterapp/core/widgets/custom_text_form_field.dart';
 import 'package:todoflutterapp/core/widgets/rounded_elevated_button.dart';
 import 'package:todoflutterapp/features/auth/cubit/register_cubit.dart';
+
+import '../../../core/routes/route_name.dart';
 
 class RegisterView extends StatefulWidget {
   const RegisterView({super.key});
@@ -60,6 +63,7 @@ class _RegisterViewState extends State<RegisterView> {
                 clearText();
                 FullScreenDialougeLoader.cancel(context);
                 CustomSnackBar.showSuccess(context, "Account Created");
+                context.goNamed(RouteNames.login);
               } else if (state is RegisterErrorState) {
                 CustomSnackBar.showError(context, state.error);
                 FullScreenDialougeLoader.cancel(context);
