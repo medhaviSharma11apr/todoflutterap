@@ -1,3 +1,3 @@
 class AppImageUrl {
-  static const logo = 'assets/images/logo.jpg';
+  static const logo = 'assets/images/logo.png';
 }
