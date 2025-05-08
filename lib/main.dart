@@ -1,10 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:todoflutterapp/core/locator/locator.dart';
 import 'package:todoflutterapp/core/routes/routes.dart';
 import 'package:todoflutterapp/core/theme/app_theme.dart';
 
+import 'features/auth/cubit/register_cubit.dart';
+
 void main() {
+  setupLocator();
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(const MyApp());
+
+  runApp(MultiBlocProvider(
+    providers: [
+      BlocProvider(
+        create: (_) => RegisterCubit(),
+      ),
+    ],
+    child: const MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {

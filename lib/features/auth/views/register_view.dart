@@ -1,7 +1,11 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todoflutterapp/core/theme/app_color.dart';
+import 'package:todoflutterapp/core/utils/custom_snackbar.dart';
+import 'package:todoflutterapp/core/utils/full_screen_dialouge_loader.dart';
 import 'package:todoflutterapp/core/utils/validation_rules.dart';
 import 'package:todoflutterapp/core/widgets/custom_text_form_field.dart';
 import 'package:todoflutterapp/core/widgets/rounded_elevated_button.dart';
@@ -21,6 +25,13 @@ class _RegisterViewState extends State<RegisterView> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   bool isPasswordVisible = false;
+
+  clearText() {
+    _firstNameController.clear();
+    _lastNameController.clear();
+    _emailController.clear();
+    _passwordController.clear();
+  }
 
   @override
   void dispose() {
@@ -42,6 +53,17 @@ class _RegisterViewState extends State<RegisterView> {
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
           child: BlocConsumer<RegisterCubit, RegisterState>(
             listener: (context, state) {
+              log('1');
+              if (state is RegisterLoadingState) {
+                FullScreenDialougeLoader.show(context);
+              } else if (state is RegisterSuccessState) {
+                clearText();
+                FullScreenDialougeLoader.cancel(context);
+                CustomSnackBar.showSuccess(context, "Account Created");
+              } else if (state is RegisterErrorState) {
+                CustomSnackBar.showError(context, state.error);
+                FullScreenDialougeLoader.cancel(context);
+              }
             },
             builder: (context, state) {
               return Form(
@@ -142,7 +164,14 @@ class _RegisterViewState extends State<RegisterView> {
                       RoundedElevatedButton(
                         buttonText: "Register",
                         onPressed: () {
-                          if (_registerFormKey.currentState!.validate()) {}
+                          if (_registerFormKey.currentState!.validate()) {
+                            context.read<RegisterCubit>().register(
+                                  firstName: _firstNameController.text,
+                                  lastName: _lastNameController.text,
+                                  email: _emailController.text,
+                                  password: _passwordController.text,
+                                );
+                          }
                         },
                       )
                     ],
