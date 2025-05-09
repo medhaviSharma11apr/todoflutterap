@@ -6,7 +6,7 @@ class StorageService {
     _box.write(key, value);
   }
 
-  dynamic getValue(String key, String value) {
+  dynamic getValue(String key,) {
     return _box.read(key);
   }
 

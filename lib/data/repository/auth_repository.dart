@@ -71,6 +71,14 @@ class AuthRepo implements IAuthRepository {
       {required String email, required String password}) async {
     try {
       // if ( await _internetConnectionChecker.hasConnection) {
+
+      // Attempt to delete current session if any
+      try {
+        await _appWriteProvider.account!.deleteSession(sessionId: 'current');
+      } catch (_) {
+        // Ignore if there's no active session
+      }
+
       Session session = await _appWriteProvider.account!.createEmailSession(
         email: email,
         password: password,

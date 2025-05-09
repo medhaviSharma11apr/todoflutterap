@@ -1,7 +1,6 @@
-import 'dart:math';
-
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
+import 'package:todoflutterapp/core/utils/storage_key.dart';
 import 'package:todoflutterapp/core/utils/storage_service.dart';
 import 'package:todoflutterapp/data/repository/todo_repository.dart';
 
@@ -26,12 +25,15 @@ class TodoCubit extends Cubit<TodoState> {
     required bool isCompleted,
   }) async {
     emit(TodoAddEditDeleteLoading());
-    final res = await  _todoRepository.addTodos(
+    final res = await _todoRepository.addTodos(
       title: title,
       description: description,
-      isCompleted: isCompleted, userId: '',
+      isCompleted: isCompleted,
+      userId: _storageService.getValue(StorageKey.userId),
     );
-
-
+    res.fold(
+      (l) => emit(TodoAddError(error: l.message)),
+      (doc) => emit(TodoAddEditDeleteSuccess()),
+    );
   }
 }

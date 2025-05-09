@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:appwrite/appwrite.dart';
 import 'package:appwrite/models.dart';
 import 'package:fpdart/fpdart.dart';
@@ -40,7 +42,9 @@ class TodoRepository implements ITodoRepository {
             "title": title,
             "description": description,
             "isCompleted": isCompleted,
+            "id": documentId,
           });
+      log('doc${document.data.toString()}');
       return right(document);
     } on AppwriteException catch (e) {
       return left(Failure(e.message ?? e.toString()));

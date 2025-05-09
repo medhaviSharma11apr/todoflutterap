@@ -8,6 +8,7 @@ import 'package:todoflutterapp/features/auth/cubit/login_cubit.dart';
 
 import 'features/auth/cubit/register_cubit.dart';
 import 'features/spalsh/cubit/splash_cubit.dart';
+import 'features/todo/cubit/todo_cubit.dart';
 
 void main() async {
   setUpLocator();
@@ -23,8 +24,11 @@ void main() async {
       BlocProvider(
         create: (_) => LoginCubit(),
       ),
-        BlocProvider(
+      BlocProvider(
         create: (_) => SplashCubit(),
+      ),
+      BlocProvider(
+        create: (_) => TodoCubit(),
       ),
     ],
     child: const MyApp(),

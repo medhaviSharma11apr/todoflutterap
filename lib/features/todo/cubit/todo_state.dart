@@ -9,7 +9,7 @@ class TodoAddEditDeleteLoading extends TodoState {}
 
 class TodoFetchLoading extends TodoState {}
 
-class TodoAddEditDelete extends TodoState {}
+class TodoAddEditDeleteSuccess extends TodoState {}
 
 class TodoFetchSuccess extends TodoState {
   final List<TodoModel> todos;
@@ -26,3 +26,4 @@ class TodoAddError extends TodoState {
   });
 
 }
+
