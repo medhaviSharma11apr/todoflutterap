@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:todoflutterapp/core/utils/storage_key.dart';
@@ -35,5 +37,42 @@ class TodoCubit extends Cubit<TodoState> {
       (l) => emit(TodoAddError(error: l.message)),
       (doc) => emit(TodoAddEditDeleteSuccess()),
     );
+  }
+
+  void getTodo() async {
+    emit(TodoAddEditDeleteLoading());
+    final res = await _todoRepository.getTodo(
+        userId: _storageService.getValue(StorageKey.userId));
+
+    res.fold((l) => emit(TodoAddError(error: l.message)),
+        (todo) => emit(TodoFetchSuccess(todos: todo)));
+  }
+
+  void editTodo({
+    required String title,
+    required String description,
+    required bool isCompleted,
+    required String documentId,
+  }) async {
+    emit(TodoAddEditDeleteLoading());
+    final res = await _todoRepository.editTodos(
+      title: title,
+      description: description,
+      isCompleted: isCompleted,
+      documentId: documentId,
+    );
+    res.fold(
+      (l) => emit(TodoAddError(error: l.message)),
+      (doc) => emit(TodoAddEditDeleteSuccess()),
+    );
+  }
+
+  void deleteTodo({required String documentId}) async {
+    emit(TodoAddEditDeleteLoading());
+
+    final res = await _todoRepository.deleteTodo(documentId: documentId);
+    log('res$res');
+    res.fold((l) => emit(TodoAddError(error: l.message)),
+        (r) => emit(TodoAddEditDeleteSuccess()));
   }
 }

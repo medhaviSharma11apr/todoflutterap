@@ -4,4 +4,5 @@ class RouteNames {
   static const login = "login";
   static const todo = "todo";
   static const addTodo = "addTodo";
+  static const editTodo = "editTodo";
 }

@@ -34,7 +34,7 @@ class TodoModel {
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'id': id,
+      '\$id': id,
       'title': title,
       'description': description,
       'userId': userId,
@@ -44,7 +44,7 @@ class TodoModel {
 
   factory TodoModel.fromMap(Map<String, dynamic> map) {
     return TodoModel(
-      id: map['id'] as String,
+      id: map['\$id'] as String,
       title: map['title'] as String,
       description: map['description'] as String,
       userId: map['userId'] as String,
@@ -65,21 +65,20 @@ class TodoModel {
   @override
   bool operator ==(covariant TodoModel other) {
     if (identical(this, other)) return true;
-  
-    return 
-      other.id == id &&
-      other.title == title &&
-      other.description == description &&
-      other.userId == userId &&
-      other.isCompleted == isCompleted;
+
+    return other.id == id &&
+        other.title == title &&
+        other.description == description &&
+        other.userId == userId &&
+        other.isCompleted == isCompleted;
   }
 
   @override
   int get hashCode {
     return id.hashCode ^
-      title.hashCode ^
-      description.hashCode ^
-      userId.hashCode ^
-      isCompleted.hashCode;
+        title.hashCode ^
+        description.hashCode ^
+        userId.hashCode ^
+        isCompleted.hashCode;
   }
 }

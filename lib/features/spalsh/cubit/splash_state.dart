@@ -7,7 +7,10 @@ class SplashInitial extends SplashState {}
 
 class SplashLoading extends SplashState {}
 
-class SplashSuccess extends SplashState {}
+class SplashSuccess extends SplashState {
+  bool ifUser;
+  SplashSuccess({this.ifUser = true});
+}
 
 class SplashError extends SplashState {
   final String error;

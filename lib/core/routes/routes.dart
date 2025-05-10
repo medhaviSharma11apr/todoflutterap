@@ -1,5 +1,6 @@
 import 'package:go_router/go_router.dart';
 import 'package:todoflutterapp/core/routes/route_name.dart';
+import 'package:todoflutterapp/data/model/todo_model.dart';
 import 'package:todoflutterapp/features/auth/views/login_view.dart';
 import 'package:todoflutterapp/features/auth/views/register_view.dart';
 import 'package:todoflutterapp/features/todo/view/todo_view.dart';
@@ -28,10 +29,17 @@ final GoRouter router = GoRouter(routes: [
     path: '/todo',
     builder: (context, state) => const ToDoView(),
   ),
-
   GoRoute(
     name: RouteNames.addTodo,
     path: '/addTodo',
     builder: (context, state) => const AddEditTodoView(),
+  ),
+  GoRoute(
+    name: RouteNames.editTodo,
+    path: '/editTodo',
+    builder: (context, state) {
+      final TodoModel todoModel = state.extra as TodoModel;
+      return AddEditTodoView(todoModel: todoModel);
+    },
   ),
 ]);
